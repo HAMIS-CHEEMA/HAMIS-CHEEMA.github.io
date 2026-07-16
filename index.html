@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Hamis Mehmood | Data Science Portfolio</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #0a0e27;
+      color: #e8ecf8;
+    }
+
+    header {
+      background: linear-gradient(135deg, #111436, #1a1f4b);
+      padding: 60px 40px;
+      text-align: center;
+      border-bottom: 2px solid #00d4ff;
+    }
+    header h1 { font-size: 2.8rem; color: #ffffff; }
+    header p { font-size: 1.1rem; color: #00d4ff; margin-top: 10px; }
+    header .links a {
+      color: #a855f7;
+      text-decoration: none;
+      margin: 0 15px;
+      font-size: 0.95rem;
+    }
+    header .links { margin-top: 20px; }
+    header .links a:hover { color: #00d4ff; }
+
+    section {
+      max-width: 1000px;
+      margin: 50px auto;
+      padding: 0 30px;
+    }
+    section h2 {
+      font-size: 1.8rem;
+      color: #00d4ff;
+      border-bottom: 1px solid #1a1f4b;
+      padding-bottom: 10px;
+      margin-bottom: 30px;
+    }
+
+    .about p { font-size: 1rem; color: #c4cfee; line-height: 1.8; }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+    }
+    .skill-card {
+      background: #111436;
+      border: 1px solid #1a1f4b;
+      border-left: 3px solid #00d4ff;
+      padding: 15px 20px;
+      border-radius: 6px;
+    }
+    .skill-card h4 {
+      color: #00d4ff;
+      margin-bottom: 8px;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .skill-card p { color: #c4cfee; font-size: 0.9rem; line-height: 1.6; }
+
+    .project-card {
+      background: #111436;
+      border: 1px solid #1a1f4b;
+      border-top: 3px solid #a855f7;
+      padding: 25px;
+      border-radius: 8px;
+      margin-bottom: 25px;
+    }
+    .project-card h3 { color: #ffffff; font-size: 1.2rem; margin-bottom: 10px; }
+    .project-card p { color: #c4cfee; font-size: 0.95rem; line-height: 1.7; margin-bottom: 15px; }
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 15px; }
+    .tag {
+      background: #1a1f4b;
+      color: #00d4ff;
+      padding: 3px 12px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+    }
+    .project-card a {
+      color: #a855f7;
+      text-decoration: none;
+      font-size: 0.9rem;
+      border: 1px solid #a855f7;
+      padding: 6px 16px;
+      border-radius: 4px;
+    }
+    .project-card a:hover { background: #a855f7; color: white; }
+
+    .contact p { color: #c4cfee; font-size: 1rem; line-height: 1.8; }
+    .contact a { color: #00d4ff; text-decoration: none; }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      color: #8892b0;
+      font-size: 0.85rem;
+      border-top: 1px solid #1a1f4b;
+      margin-top: 60px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <h1>Hamis Mehmood</h1>
+  <p>Data Science Student | Python | Machine Learning | SQL</p>
+  <div class="links">
+    <a href="https://github.com/HAMIS-CHEEMA" target="_blank">GitHub</a>
+    <a href="https://www.linkedin.com/in/hamis-mehmood-a53a39258/" target="_blank">LinkedIn</a>
+    <a href="mailto:hamismehmood6@gmail.com">Email</a>
+  </div>
+</header>
+
+<!-- ABOUT -->
+<section class="about">
+  <h2>About Me</h2>
+  <p>
+    I am a Data Science student passionate about extracting insights from data
+    and building machine learning models that solve real problems. I work with
+    Python, Pandas, Scikit-learn, and SQL. Currently building my skills through
+    hands-on projects and continuous learning.
+  </p>
+</section>
+
+<!-- SKILLS -->
+<section>
+  <h2>Skills</h2>
+  <div class="skills-grid">
+    <div class="skill-card">
+      <h4>Languages</h4>
+      <p>Python, SQL</p>
+    </div>
+    <div class="skill-card">
+      <h4>Libraries</h4>
+      <p>Pandas, NumPy, Matplotlib, Seaborn, Scikit-learn</p>
+    </div>
+    <div class="skill-card">
+      <h4>Tools</h4>
+      <p>Jupyter Notebook, Power BI, PyCharm, VS Code, GitHub</p>
+    </div>
+    <div class="skill-card">
+      <h4>Currently Learning</h4>
+      <p>Machine Learning, PostgreSQL, Data Visualization</p>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section>
+  <h2>Projects</h2>
+
+  <!-- PROJECT 1 -->
+  <div class="project-card">
+    <h3>Titanic Survival — EDA & Data Analysis</h3>
+    <p>
+      Performed full exploratory data analysis on the Titanic dataset.
+      Handled missing values, engineered age buckets, analyzed survival
+      rates across gender, class and age groups, and visualized
+      correlations using Seaborn heatmaps.
+    </p>
+    <div class="tags">
+      <span class="tag">Python</span>
+      <span class="tag">Pandas</span>
+      <span class="tag">Seaborn</span>
+      <span class="tag">Matplotlib</span>
+      <span class="tag">EDA</span>
+    </div>
+    <a href="https://github.com/HAMIS-CHEEMA/Data-Science/blob/main/Month_2/Week_08/Day_06/titanic_file/titanic_EDA.ipynb" target="_blank">
+      View on GitHub
+    </a>
+  </div>
+
+  <!-- PROJECT 2 -->
+  <div class="project-card">
+    <h3>Netflix Analytics & EDA Report</h3>
+    <p>
+      Analyzed Netflix content dataset to uncover trends in content type,
+      release years, top genres, and country-wise distribution.
+      Built an interactive analytics dashboard with visual storytelling
+      to derive actionable business insights.
+    </p>
+    <div class="tags">
+      <span class="tag">Python</span>
+      <span class="tag">Pandas</span>
+      <span class="tag">EDA</span>
+      <span class="tag">Dashboard</span>
+    </div>
+    <a href="https://github.com/HAMIS-CHEEMA/Data-Science/blob/main/Month_2/Week_06/M2W6_Day_6.ipynb" target="_blank">
+      View on GitHub
+    </a>
+    &nbsp;&nbsp;
+  <a href="https://github.com/HAMIS-CHEEMA/Data-Science/blob/main/Month_2/Week_06/netflix_eda_report.html" target="_blank">View EDA Repost</a>
+  </div>
+
+  <!-- PROJECT 3 -->
+  <div class="project-card">
+    <h3>Weather Data Analysis</h3>
+    <p>
+      Conducted exploratory analysis on real-world weather data to identify
+      temperature trends, seasonal patterns, and anomalies.
+      Applied data cleaning and visualization techniques to communicate
+      findings clearly through charts and subplots.
+    </p>
+    <div class="tags">
+      <span class="tag">Python</span>
+      <span class="tag">Pandas</span>
+      <span class="tag">Data Analysis</span>
+    </div>
+    <a href="https://github.com/HAMIS-CHEEMA/Data-Science/blob/main/Month_2/Week_05/weather_analysis.ipynb" target="_blank">
+      View on GitHub
+    </a>
+  </div>
+
+  <!-- PROJECT 4 -->
+  <div class="project-card">
+    <h3>Superstore Sales Dashboard — Power BI</h3>
+    <p>
+      Built a professional business intelligence dashboard using Power BI
+      on the Superstore sales dataset. Visualized revenue by region,
+      category performance, profit margins, and sales trends to support
+      data-driven business decisions.
+    </p>
+    <div class="tags">
+      <span class="tag">Power BI</span>
+      <span class="tag">Business Intelligence</span>
+      <span class="tag">Dashboard</span>
+      <span class="tag">Data Visualization</span>
+    </div>
+    <a href="https://github.com/HAMIS-CHEEMA/Data-Science/blob/main/Month_2/Week_07/powerbi/superstore_dashboard(01).pdf" target="_blank">
+      View on GitHub
+    </a>
+  </div>
+
+  <!-- PROJECT 5 -->
+  <div class="project-card">
+    <h3>To-Do List Manager — Python OOP</h3>
+    <p>
+      Built a fully functional command-line task manager using Python.
+      Implemented OOP principles including classes, inheritance and
+      encapsulation. Features include add, remove, complete and save tasks
+      with JSON persistence and robust exception handling.
+    </p>
+    <div class="tags">
+      <span class="tag">Python</span>
+      <span class="tag">OOP</span>
+      <span class="tag">JSON</span>
+      <span class="tag">File Handling</span>
+      <span class="tag">CLI</span>
+    </div>
+    <a href="https://github.com/HAMIS-CHEEMA/Data-Science/blob/main/Month_1/Week_04/M1W4_Day_5.py" target="_blank">
+      View on GitHub
+    </a>
+  </div>
+
+</section>
+
+<!-- CONTACT -->
+<section class="contact">
+  <h2>Contact</h2>
+  <p>
+    GitHub: <a href="https://github.com/HAMIS-CHEEMA" target="_blank">github.com/HAMIS-CHEEMA</a><br/>
+    LinkedIn: <a href="https://www.linkedin.com/in/hamis-mehmood-a53a39258/" target="_blank">linkedin.com/in/hamis-mehmood</a><br/>
+    Email: <a href="mailto:hamismehmood6@gmail.com">hamismehmood6@gmail.com</a>
+  </p>
+</section>
+
+<footer>
+  <p>Built by Hamis Mehmood · Hosted on GitHub Pages</p>
+</footer>
+
+</body>
+</html>
