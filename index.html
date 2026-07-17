@@ -5,135 +5,636 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Hamis Mehmood | Data Science Portfolio</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600&family=Share+Tech+Mono&display=swap');
+
+    :root {
+      --cyan:   #00f5ff;
+      --purple: #bf00ff;
+      --pink:   #ff0080;
+      --green:  #00ff88;
+      --navy:   #020818;
+      --card:   #060e1e;
+      --border: #0a1628;
+      --text:   #c8d8f0;
+      --muted:  #4a6080;
+    }
+
     * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
 
     body {
-      font-family: 'Segoe UI', sans-serif;
-      background: #0a0e27;
-      color: #e8ecf8;
+      font-family: 'Rajdhani', sans-serif;
+      background: var(--navy);
+      color: var(--text);
+      overflow-x: hidden;
     }
 
-    header {
-      background: linear-gradient(135deg, #111436, #1a1f4b);
-      padding: 60px 40px;
-      text-align: center;
-      border-bottom: 2px solid #00d4ff;
+    /* SCROLLBAR */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--navy); }
+    ::-webkit-scrollbar-thumb { background: var(--cyan); border-radius: 2px; }
+
+    /* PARTICLES */
+    #particles {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
     }
-    header h1 { font-size: 2.8rem; color: #ffffff; }
-    header p { font-size: 1.1rem; color: #00d4ff; margin-top: 10px; }
-    header .links a {
-      color: #a855f7;
+    .particle {
+      position: absolute;
+      border-radius: 50%;
+      animation: floatUp linear infinite;
+      opacity: 0;
+    }
+    @keyframes floatUp {
+      0%   { transform: translateY(100vh) rotate(0deg);   opacity: 0; }
+      10%  { opacity: 1; }
+      90%  { opacity: 1; }
+      100% { transform: translateY(-10vh) rotate(720deg); opacity: 0; }
+    }
+
+    /* NAVBAR */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 40px;
+      background: rgba(2,8,24,0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(0,245,255,0.15);
+      transition: all 0.3s ease;
+    }
+    nav.scrolled {
+      padding: 10px 40px;
+      border-bottom-color: rgba(0,245,255,0.4);
+      box-shadow: 0 4px 30px rgba(0,245,255,0.08);
+    }
+    .nav-logo {
+      font-family: 'Orbitron', monospace;
+      font-size: 1rem;
+      font-weight: 900;
+      color: var(--cyan);
+      letter-spacing: 3px;
       text-decoration: none;
-      margin: 0 15px;
-      font-size: 0.95rem;
     }
-    header .links { margin-top: 20px; }
-    header .links a:hover { color: #00d4ff; }
-
-    section {
-      max-width: 1000px;
-      margin: 50px auto;
-      padding: 0 30px;
+    .nav-logo span { color: var(--purple); }
+    .nav-links { display: flex; gap: 30px; list-style: none; }
+    .nav-links a {
+      font-family: 'Rajdhani', sans-serif;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-weight: 600;
+      transition: color 0.3s;
+      position: relative;
     }
-    section h2 {
-      font-size: 1.8rem;
-      color: #00d4ff;
-      border-bottom: 1px solid #1a1f4b;
-      padding-bottom: 10px;
-      margin-bottom: 30px;
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px; left: 0;
+      width: 0; height: 1px;
+      background: var(--cyan);
+      transition: width 0.3s ease;
+    }
+    .nav-links a:hover { color: var(--cyan); }
+    .nav-links a:hover::after { width: 100%; }
+
+    /* HERO */
+    #hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 120px 40px 80px;
+      z-index: 1;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 40%, rgba(0,245,255,0.07) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 40% at 80% 80%, rgba(191,0,255,0.08) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 30% at 20% 20%, rgba(255,0,128,0.05) 0%, transparent 60%);
+      animation: bgPulse 8s ease-in-out infinite alternate;
+    }
+    @keyframes bgPulse {
+      0%   { opacity: 0.7; transform: scale(1);    }
+      100% { opacity: 1;   transform: scale(1.05); }
+    }
+    .hero-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0,245,255,0.012) 2px,
+        rgba(0,245,255,0.012) 4px
+      );
+      pointer-events: none;
     }
 
-    .about p { font-size: 1rem; color: #c4cfee; line-height: 1.8; }
+    .hero-eyebrow {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--cyan);
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.3s forwards;
+    }
+    .hero-name {
+      font-family: 'Orbitron', monospace;
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: 4px;
+      margin-bottom: 20px;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.5s forwards;
+    }
+    .hero-name .c1 { color: #fff; }
+    .hero-name .c2 { color: var(--cyan); }
 
+    .typing-wrap {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: clamp(0.85rem, 2vw, 1.15rem);
+      color: var(--green);
+      margin-bottom: 44px;
+      min-height: 2em;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.7s forwards;
+    }
+    .typing-wrap::before { content: '> '; color: var(--muted); }
+    .cursor {
+      display: inline-block;
+      width: 2px; height: 1.1em;
+      background: var(--cyan);
+      vertical-align: middle;
+      margin-left: 2px;
+      animation: blink 1s step-end infinite;
+    }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+    .hero-btns {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.9s forwards;
+    }
+    .btn {
+      font-family: 'Orbitron', monospace;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      padding: 14px 30px;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+    .btn-cyan {
+      color: var(--cyan);
+      border: 1px solid var(--cyan);
+      box-shadow: 0 0 20px rgba(0,245,255,0.15), inset 0 0 20px rgba(0,245,255,0.04);
+    }
+    .btn-cyan:hover {
+      background: var(--cyan);
+      color: var(--navy);
+      box-shadow: 0 0 50px rgba(0,245,255,0.5);
+      transform: translateY(-2px);
+    }
+    .btn-purple {
+      color: var(--purple);
+      border: 1px solid var(--purple);
+      box-shadow: 0 0 20px rgba(191,0,255,0.15), inset 0 0 20px rgba(191,0,255,0.04);
+    }
+    .btn-purple:hover {
+      background: var(--purple);
+      color: #fff;
+      box-shadow: 0 0 50px rgba(191,0,255,0.5);
+      transform: translateY(-2px);
+    }
+
+    .hero-line {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--cyan), var(--purple), var(--pink), transparent);
+      animation: glowPulse 3s ease-in-out infinite;
+    }
+    @keyframes glowPulse { 0%,100%{opacity:0.3} 50%{opacity:1} }
+
+    /* SECTIONS */
+    .section {
+      position: relative;
+      z-index: 1;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 100px 40px;
+    }
+    .sec-head {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 60px;
+    }
+    .sec-num {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.68rem;
+      color: var(--pink);
+      letter-spacing: 3px;
+      white-space: nowrap;
+    }
+    .sec-title {
+      font-family: 'Orbitron', monospace;
+      font-size: clamp(1.3rem, 3vw, 1.9rem);
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: 3px;
+      white-space: nowrap;
+    }
+    .sec-title .hl { color: var(--cyan); }
+    .sec-rule {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(0,245,255,0.35), transparent);
+    }
+
+    /* REVEAL */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ABOUT */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+    .about-text p {
+      font-size: 1.05rem;
+      color: var(--text);
+      line-height: 1.9;
+      font-weight: 300;
+    }
+    .about-text p + p { margin-top: 16px; }
+    .stat-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .stat-box {
+      background: var(--card);
+      border: 1px solid rgba(0,245,255,0.12);
+      border-radius: 4px;
+      padding: 24px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+    .stat-box::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--cyan), var(--purple));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s ease;
+    }
+    .stat-box:hover::before { transform: scaleX(1); }
+    .stat-box:hover {
+      border-color: rgba(0,245,255,0.4);
+      box-shadow: 0 0 30px rgba(0,245,255,0.1);
+      transform: translateY(-4px);
+    }
+    .stat-num {
+      font-family: 'Orbitron', monospace;
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--cyan);
+    }
+    .stat-lbl {
+      font-size: 0.7rem;
+      color: var(--muted);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-top: 6px;
+    }
+
+    /* SKILLS */
     .skills-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 15px;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
     }
     .skill-card {
-      background: #111436;
-      border: 1px solid #1a1f4b;
-      border-left: 3px solid #00d4ff;
-      padding: 15px 20px;
-      border-radius: 6px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 26px 22px;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.35s ease;
+    }
+    .skill-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 3px;
+      background: linear-gradient(180deg, var(--cyan), var(--purple));
+    }
+    .skill-card:hover {
+      border-color: rgba(0,245,255,0.4);
+      transform: translateY(-6px);
+      box-shadow: 0 12px 40px rgba(0,245,255,0.12), 0 0 0 1px rgba(0,245,255,0.2);
     }
     .skill-card h4 {
-      color: #00d4ff;
-      margin-bottom: 8px;
-      font-size: 0.85rem;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.68rem;
+      color: var(--cyan);
+      letter-spacing: 3px;
       text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .skill-card p {
+      font-size: 0.95rem;
+      color: var(--text);
+      line-height: 1.7;
+      font-weight: 300;
+    }
+
+    /* PROJECTS */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+    }
+    .project-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 30px;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      transform-style: preserve-3d;
+    }
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--cyan), var(--purple), var(--pink));
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .project-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at var(--mx,50%) var(--my,50%), rgba(0,245,255,0.055) 0%, transparent 60%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+    .project-card:hover::before { opacity: 1; }
+    .project-card:hover::after  { opacity: 1; }
+    .project-card:hover {
+      border-color: rgba(0,245,255,0.3);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 40px rgba(0,245,255,0.08);
+    }
+    .proj-num {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.62rem;
+      color: var(--pink);
+      letter-spacing: 3px;
+      margin-bottom: 10px;
+    }
+    .project-card h3 {
+      font-family: 'Orbitron', monospace;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: 2px;
+      margin-bottom: 14px;
+      line-height: 1.5;
+    }
+    .project-card p {
+      font-size: 0.93rem;
+      color: #8a9ab8;
+      line-height: 1.75;
+      margin-bottom: 18px;
+      font-weight: 300;
+    }
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 22px; }
+    .tag {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.62rem;
+      color: var(--cyan);
+      background: rgba(0,245,255,0.06);
+      border: 1px solid rgba(0,245,255,0.2);
+      padding: 4px 10px;
+      border-radius: 2px;
       letter-spacing: 1px;
     }
-    .skill-card p { color: #c4cfee; font-size: 0.9rem; line-height: 1.6; }
-
-    .project-card {
-      background: #111436;
-      border: 1px solid #1a1f4b;
-      border-top: 3px solid #a855f7;
-      padding: 25px;
-      border-radius: 8px;
-      margin-bottom: 25px;
-    }
-    .project-card h3 { color: #ffffff; font-size: 1.2rem; margin-bottom: 10px; }
-    .project-card p { color: #c4cfee; font-size: 0.95rem; line-height: 1.7; margin-bottom: 15px; }
-    .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 15px; }
-    .tag {
-      background: #1a1f4b;
-      color: #00d4ff;
-      padding: 3px 12px;
-      border-radius: 20px;
-      font-size: 0.8rem;
-    }
-    .project-card a {
-      color: #a855f7;
+    .proj-links { display: flex; gap: 10px; flex-wrap: wrap; }
+    .proj-link {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.68rem;
+      color: var(--purple);
       text-decoration: none;
-      font-size: 0.9rem;
-      border: 1px solid #a855f7;
-      padding: 6px 16px;
-      border-radius: 4px;
+      letter-spacing: 2px;
+      border: 1px solid rgba(191,0,255,0.35);
+      padding: 7px 16px;
+      border-radius: 2px;
+      transition: all 0.3s ease;
     }
-    .project-card a:hover { background: #a855f7; color: white; }
+    .proj-link:hover {
+      background: var(--purple);
+      color: #fff;
+      box-shadow: 0 0 28px rgba(191,0,255,0.45);
+      border-color: var(--purple);
+    }
+    .proj-link.alt {
+      color: var(--cyan);
+      border-color: rgba(0,245,255,0.35);
+    }
+    .proj-link.alt:hover {
+      background: var(--cyan);
+      color: var(--navy);
+      box-shadow: 0 0 28px rgba(0,245,255,0.45);
+      border-color: var(--cyan);
+    }
 
-    .contact p { color: #c4cfee; font-size: 1rem; line-height: 1.8; }
-    .contact a { color: #00d4ff; text-decoration: none; }
+    /* CONTACT */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: start;
+    }
+    .contact-text p {
+      font-size: 1.05rem;
+      color: var(--text);
+      line-height: 1.9;
+      font-weight: 300;
+    }
+    .contact-items { display: flex; flex-direction: column; gap: 14px; }
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 18px 22px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    .contact-item:hover {
+      border-color: rgba(0,245,255,0.4);
+      box-shadow: 0 0 30px rgba(0,245,255,0.1);
+      transform: translateX(6px);
+    }
+    .c-icon { font-size: 1.1rem; width: 32px; text-align: center; }
+    .c-info { flex: 1; }
+    .c-label {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.6rem;
+      color: var(--muted);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .c-val { font-size: 0.92rem; color: var(--cyan); }
 
+    /* FOOTER */
     footer {
+      position: relative;
+      z-index: 1;
       text-align: center;
-      padding: 30px;
-      color: #8892b0;
-      font-size: 0.85rem;
-      border-top: 1px solid #1a1f4b;
-      margin-top: 60px;
+      padding: 36px;
+      border-top: 1px solid rgba(0,245,255,0.08);
+      margin-top: 40px;
+    }
+    footer p {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.68rem;
+      color: var(--muted);
+      letter-spacing: 3px;
+    }
+    footer span { color: var(--cyan); }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0);    }
+    }
+
+    @media (max-width: 768px) {
+      nav { padding: 14px 20px; }
+      .nav-links { gap: 16px; }
+      .section { padding: 70px 20px; }
+      .about-grid  { grid-template-columns: 1fr; gap: 40px; }
+      .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+      .projects-grid { grid-template-columns: 1fr; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
     }
   </style>
 </head>
 <body>
 
-<!-- HEADER -->
-<header>
-  <h1>Hamis Mehmood</h1>
-  <p>Data Science Student | Python | Machine Learning | SQL</p>
-  <div class="links">
-    <a href="https://github.com/HAMIS-CHEEMA" target="_blank">GitHub</a>
-    <a href="https://www.linkedin.com/in/hamis-mehmood-a53a39258/" target="_blank">LinkedIn</a>
-    <a href="mailto:hamismehmood6@gmail.com">Email</a>
-  </div>
-</header>
+<!-- PARTICLES -->
+<div id="particles"></div>
 
-<!-- ABOUT -->
-<section class="about">
-  <h2>About Me</h2>
-  <p>
-    I am a Data Science student passionate about extracting insights from data
-    and building machine learning models that solve real problems. I work with
-    Python, Pandas, Scikit-learn, and SQL. Currently building my skills through
-    hands-on projects and continuous learning.
-  </p>
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="#hero" class="nav-logo">HM<span>.</span>DS</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <p class="hero-eyebrow">// Data Science Portfolio</p>
+  <h1 class="hero-name">
+    <span class="c1">HAMIS </span><span class="c2">MEHMOOD</span>
+  </h1>
+  <div class="typing-wrap">
+    <span id="typed"></span><span class="cursor"></span>
+  </div>
+  <div class="hero-btns">
+    <a href="#projects" class="btn btn-cyan">View Projects</a>
+    <a href="#contact"  class="btn btn-purple">Contact Me</a>
+  </div>
+  <div class="hero-line"></div>
 </section>
 
+<!-- ABOUT -->
+<div class="section reveal" id="about">
+  <div class="sec-head">
+    <span class="sec-num">01 //</span>
+    <h2 class="sec-title">About <span class="hl">Me</span></h2>
+    <div class="sec-rule"></div>
+  </div>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>
+        I am a Data Science student passionate about extracting insights from data
+        and building machine learning models that solve real problems. I work with
+        Python, Pandas, Scikit-learn, SQL and Power BI.
+      </p>
+      <p>
+        Currently leveling up through hands-on projects in EDA, data visualization,
+        and machine learning. Every dataset is a puzzle — I find the pattern.
+      </p>
+    </div>
+    <div class="stat-grid">
+      <div class="stat-box"><div class="stat-num">5+</div><div class="stat-lbl">Projects Built</div></div>
+      <div class="stat-box"><div class="stat-num">3+</div><div class="stat-lbl">Tools Mastered</div></div>
+      <div class="stat-box"><div class="stat-num">100%</div><div class="stat-lbl">Self Driven</div></div>
+      <div class="stat-box"><div class="stat-num">∞</div><div class="stat-lbl">Still Learning</div></div>
+    </div>
+  </div>
+</div>
+
 <!-- SKILLS -->
-<section>
-  <h2>Skills</h2>
+<div class="section reveal" id="skills">
+  <div class="sec-head">
+    <span class="sec-num">02 //</span>
+    <h2 class="sec-title">Tech <span class="hl">Stack</span></h2>
+    <div class="sec-rule"></div>
+  </div>
   <div class="skills-grid">
     <div class="skill-card">
       <h4>Languages</h4>
@@ -152,130 +653,198 @@
       <p>Machine Learning, PostgreSQL, Data Visualization</p>
     </div>
   </div>
-</section>
+</div>
 
 <!-- PROJECTS -->
-<section>
-  <h2>Projects</h2>
-
-  <!-- PROJECT 1 -->
-  <div class="project-card">
-    <h3>Titanic Survival — EDA & Data Analysis</h3>
-    <p>
-      Performed full exploratory data analysis on the Titanic dataset.
-      Handled missing values, engineered age buckets, analyzed survival
-      rates across gender, class and age groups, and visualized
-      correlations using Seaborn heatmaps.
-    </p>
-    <div class="tags">
-      <span class="tag">Python</span>
-      <span class="tag">Pandas</span>
-      <span class="tag">Seaborn</span>
-      <span class="tag">Matplotlib</span>
-      <span class="tag">EDA</span>
-    </div>
-    <a href="https://github.com/HAMIS-CHEEMA/Data-Science/blob/main/Month_2/Week_08/Day_06/titanic_file/titanic_EDA.ipynb" target="_blank">
-      View on GitHub
-    </a>
+<div class="section reveal" id="projects">
+  <div class="sec-head">
+    <span class="sec-num">03 //</span>
+    <h2 class="sec-title">Featured <span class="hl">Projects</span></h2>
+    <div class="sec-rule"></div>
   </div>
+  <div class="projects-grid">
 
-  <!-- PROJECT 2 -->
-  <div class="project-card">
-    <h3>Netflix Analytics & EDA Report</h3>
-    <p>
-      Analyzed Netflix content dataset to uncover trends in content type,
-      release years, top genres, and country-wise distribution.
-      Built an interactive analytics dashboard with visual storytelling
-      to derive actionable business insights.
-    </p>
-    <div class="tags">
-      <span class="tag">Python</span>
-      <span class="tag">Pandas</span>
-      <span class="tag">EDA</span>
-      <span class="tag">Dashboard</span>
+    <div class="project-card">
+      <div class="proj-num">PROJECT_01</div>
+      <h3>Titanic Survival — EDA & Data Analysis</h3>
+      <p>Full exploratory data analysis on the Titanic dataset. Handled missing values, engineered age buckets, analyzed survival rates across gender, class and age — visualized correlations using Seaborn heatmaps.</p>
+      <div class="tags">
+        <span class="tag">Python</span><span class="tag">Pandas</span>
+        <span class="tag">Seaborn</span><span class="tag">Matplotlib</span><span class="tag">EDA</span>
+      </div>
+      <div class="proj-links">
+        <a class="proj-link" href="https://github.com/HAMIS-CHEEMA/Data-Science/blob/main/Month_2/Week_08/Day_06/titanic_file/titanic_EDA.ipynb" target="_blank">View on GitHub →</a>
+      </div>
     </div>
-    <a href="https://github.com/HAMIS-CHEEMA/Data-Science/blob/main/Month_2/Week_06/M2W6_Day_6.ipynb" target="_blank">
-      View on GitHub
-    </a>
-    &nbsp;&nbsp;
-  <a href="https://github.com/HAMIS-CHEEMA/Data-Science/blob/main/Month_2/Week_06/netflix_eda_report.html" target="_blank">View EDA Repost</a>
-  </div>
 
-  <!-- PROJECT 3 -->
-  <div class="project-card">
-    <h3>Weather Data Analysis</h3>
-    <p>
-      Conducted exploratory analysis on real-world weather data to identify
-      temperature trends, seasonal patterns, and anomalies.
-      Applied data cleaning and visualization techniques to communicate
-      findings clearly through charts and subplots.
-    </p>
-    <div class="tags">
-      <span class="tag">Python</span>
-      <span class="tag">Pandas</span>
-      <span class="tag">Data Analysis</span>
+    <div class="project-card">
+      <div class="proj-num">PROJECT_02</div>
+      <h3>Netflix Analytics & EDA Report</h3>
+      <p>Analyzed Netflix content dataset to uncover trends in content type, release years, top genres and country-wise distribution. Visual storytelling used to derive actionable business insights.</p>
+      <div class="tags">
+        <span class="tag">Python</span><span class="tag">Pandas</span>
+        <span class="tag">EDA</span><span class="tag">Dashboard</span>
+      </div>      
+      <div class="proj-links">
+        <a class="proj-link" href="https://github.com/HAMIS-CHEEMA/Data-Science/blob/main/Month_2/Week_06/M2W6_Day_6.ipynb" target="_blank">View Code →</a>
+        <a class="proj-link alt" href="https://github.com/HAMIS-CHEEMA/Data-Science/blob/main/Month_2/Week_06/netflix_eda_report.html" target="_blank">EDA Report →</a>
+      </div>
     </div>
-    <a href="https://github.com/HAMIS-CHEEMA/Data-Science/blob/main/Month_2/Week_05/weather_analysis.ipynb" target="_blank">
-      View on GitHub
-    </a>
-  </div>
 
-  <!-- PROJECT 4 -->
-  <div class="project-card">
-    <h3>Superstore Sales Dashboard — Power BI</h3>
-    <p>
-      Built a professional business intelligence dashboard using Power BI
-      on the Superstore sales dataset. Visualized revenue by region,
-      category performance, profit margins, and sales trends to support
-      data-driven business decisions.
-    </p>
-    <div class="tags">
-      <span class="tag">Power BI</span>
-      <span class="tag">Business Intelligence</span>
-      <span class="tag">Dashboard</span>
-      <span class="tag">Data Visualization</span>
+    <div class="project-card">
+      <div class="proj-num">PROJECT_03</div>
+      <h3>Weather Data Analysis</h3>
+      <p>Exploratory analysis on real-world weather data identifying temperature trends, seasonal patterns and anomalies. Applied data cleaning and visualization to communicate findings clearly.</p>
+      <div class="tags">
+        <span class="tag">Python</span><span class="tag">Pandas</span><span class="tag">Data Analysis</span>
+      </div>
+      <div class="proj-links">
+        <a class="proj-link" href="https://github.com/HAMIS-CHEEMA/Data-Science/blob/main/Month_2/Week_05/weather_analysis.ipynb" target="_blank">View on GitHub →</a>
+      </div>
     </div>
-    <a href="https://github.com/HAMIS-CHEEMA/Data-Science/blob/main/Month_2/Week_07/powerbi/superstore_dashboard(01).pdf" target="_blank">
-      View on GitHub
-    </a>
-  </div>
 
-  <!-- PROJECT 5 -->
-  <div class="project-card">
-    <h3>To-Do List Manager — Python OOP</h3>
-    <p>
-      Built a fully functional command-line task manager using Python.
-      Implemented OOP principles including classes, inheritance and
-      encapsulation. Features include add, remove, complete and save tasks
-      with JSON persistence and robust exception handling.
-    </p>
-    <div class="tags">
-      <span class="tag">Python</span>
-      <span class="tag">OOP</span>
-      <span class="tag">JSON</span>
-      <span class="tag">File Handling</span>
-      <span class="tag">CLI</span>
+    <div class="project-card">
+      <div class="proj-num">PROJECT_04</div>
+      <h3>Superstore Sales Dashboard — Power BI</h3>
+      <p>Professional BI dashboard built in Power BI on the Superstore sales dataset. Visualized revenue by region, category performance, profit margins and sales trends for data-driven decisions.</p>
+      <div class="tags">
+        <span class="tag">Power BI</span><span class="tag">BI Dashboard</span><span class="tag">Data Visualization</span>
+      </div>
+      <div class="proj-links">
+        <a class="proj-link" href="https://github.com/HAMIS-CHEEMA/Data-Science/blob/main/Month_2/Week_07/powerbi/superstore_dashboard(01).pdf" target="_blank">View on GitHub →</a>
+      </div>
     </div>
-    <a href="https://github.com/HAMIS-CHEEMA/Data-Science/blob/main/Month_1/Week_04/M1W4_Day_5.py" target="_blank">
-      View on GitHub
-    </a>
-  </div>
 
-</section>
+    <div class="project-card">
+      <div class="proj-num">PROJECT_05</div>
+      <h3>To-Do List Manager — Python OOP</h3>
+      <p>Fully functional command-line task manager in Python. Implemented OOP — classes, inheritance and encapsulation. Features add, remove, complete and save tasks with JSON persistence.</p>
+      <div class="tags">
+        <span class="tag">Python</span><span class="tag">OOP</span>
+        <span class="tag">JSON</span><span class="tag">File Handling</span><span class="tag">CLI</span>
+      </div>
+      <div class="proj-links">
+        <a class="proj-link" href="https://github.com/HAMIS-CHEEMA/Data-Science/blob/main/Month_1/Week_04/M1W4_Day_5.py" target="_blank">View on GitHub →</a>
+      </div>
+    </div>
+
+  </div>
+</div>
 
 <!-- CONTACT -->
-<section class="contact">
-  <h2>Contact</h2>
-  <p>
-    GitHub: <a href="https://github.com/HAMIS-CHEEMA" target="_blank">github.com/HAMIS-CHEEMA</a><br/>
-    LinkedIn: <a href="https://www.linkedin.com/in/hamis-mehmood-a53a39258/" target="_blank">linkedin.com/in/hamis-mehmood</a><br/>
-    Email: <a href="mailto:hamismehmood6@gmail.com">hamismehmood6@gmail.com</a>
-  </p>
-</section>
+<div class="section reveal" id="contact">
+  <div class="sec-head">
+    <span class="sec-num">04 //</span>
+    <h2 class="sec-title">Get In <span class="hl">Touch</span></h2>
+    <div class="sec-rule"></div>
+  </div>
+  <div class="contact-grid">
+    <div class="contact-text">
+      <p>
+        Open to Data Science internships, collaborations and opportunities.
+        Have a project in mind or just want to connect? Reach out — let's
+        turn data into something meaningful together.
+      </p>
+    </div>
+    <div class="contact-items">
+      <a href="https://github.com/HAMIS-CHEEMA" target="_blank" class="contact-item">
+        <div class="c-icon">⌥</div>
+        <div class="c-info">
+          <div class="c-label">GitHub</div>
+          <div class="c-val">github.com/HAMIS-CHEEMA</div>
+        </div>
+      </a>
+      <a href="https://www.linkedin.com/in/hamis-mehmood-a53a39258/" target="_blank" class="contact-item">
+        <div class="c-icon">◈</div>
+        <div class="c-info">
+          <div class="c-label">LinkedIn</div>
+          <div class="c-val">Hamis Mehmood</div>
+        </div>
+      </a>
+      <a href="mailto:hamismehmood6@gmail.com" class="contact-item">
+        <div class="c-icon">◉</div>
+        <div class="c-info">
+          <div class="c-label">Email</div>
+          <div class="c-val">hamismehmood6@gmail.com</div>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
 
+<!-- FOOTER -->
 <footer>
-  <p>Built by Hamis Mehmood · Hosted on GitHub Pages</p>
+  <p>Built by <span>Hamis Mehmood</span> · Hosted on <span>GitHub Pages</span> · <span>2025</span></p>
 </footer>
 
+<script>
+// PARTICLES
+(function(){
+  const wrap = document.getElementById('particles');
+  const colors = ['#00f5ff','#bf00ff','#ff0080','#00ff88'];
+  for(let i = 0; i < 65; i++){
+    const d = document.createElement('div');
+    d.className = 'particle';
+    const s = Math.random() * 3 + 1;
+    const c = colors[Math.floor(Math.random() * colors.length)];
+    d.style.cssText = `
+      width:${s}px; height:${s}px; background:${c};
+      left:${Math.random()*100}%;
+      animation-duration:${Math.random()*15+10}s;
+      animation-delay:${Math.random()*15}s;
+      box-shadow:0 0 ${s*3}px ${c};
+    `;
+    wrap.appendChild(d);
+  }
+})();
+
+// NAVBAR SCROLL
+window.addEventListener('scroll', () => {
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+});
+
+// TYPING ANIMATION
+(function(){
+  const phrases = [
+    'Data Science Student',
+    'Python Developer',
+    'EDA Enthusiast',
+    'Power BI Analyst',
+    'Always Learning...'
+  ];
+  let pi = 0, ci = 0, del = false;
+  const el = document.getElementById('typed');
+  function tick(){
+    const w = phrases[pi];
+    if(!del){ el.textContent = w.slice(0, ++ci); if(ci===w.length){del=true; setTimeout(tick,1800); return;} }
+    else    { el.textContent = w.slice(0, --ci); if(ci===0){del=false; pi=(pi+1)%phrases.length;} }
+    setTimeout(tick, del ? 55 : 95);
+  }
+  setTimeout(tick, 1200);
+})();
+
+// SCROLL REVEAL
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(r => obs.observe(r));
+
+// 3D TILT
+document.querySelectorAll('.project-card').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const r  = card.getBoundingClientRect();
+    const x  = e.clientX - r.left;
+    const y  = e.clientY - r.top;
+    const rx = ((y - r.height/2) / (r.height/2)) * -8;
+    const ry = ((x - r.width/2)  / (r.width/2))  *  8;
+    card.style.transform = `perspective(800px) rotateX(${rx}deg) rotateY(${ry}deg) translateZ(8px)`;
+    card.style.setProperty('--mx', `${(x/r.width)*100}%`);
+    card.style.setProperty('--my', `${(y/r.height)*100}%`);
+  });
+  card.addEventListener('mouseleave', () => {
+    card.style.transform = 'perspective(800px) rotateX(0) rotateY(0) translateZ(0)';
+  });
+});
+</script>
 </body>
 </html>
